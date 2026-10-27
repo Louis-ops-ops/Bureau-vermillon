@@ -1,0 +1,47 @@
+/* Variables du design system. A charger AVANT components/bundle.css. Genere depuis tokens.json. */
+:root {
+  color-scheme: dark;
+  --encre-000: #0b0a09;
+  --encre-100: #12100e;
+  --encre-200: #1d1a16;
+  --encre-300: #2a251f;
+  --papier-100: #e9e0ce;
+  --papier-200: #bfb5a2;
+  --papier-300: #8a8172;
+  --tampon: #8e2b20;
+  --tampon-fonce: #6b1f17;
+  --vermillon: #d9381e;
+  --laiton: #c8a24a;
+  --laiton-fonce: #8a6e2e;
+  --policier-bleu: #1b3a5c;
+  --policier-orange: #e08a3c;
+  --narcos-turquoise: #1f7a75;
+  --narcos-peche: #e8a277;
+  --viking-teal: #4e8c8a;
+  --viking-ocre: #c08a2e;
+  --chevalier-acier: #3e5c78;
+  --chevalier-or: #a87b2a;
+  --succes: #7a9c4e;
+  --alerte: #e0563c;
+  --font-display: Anton, "Arial Narrow", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-document: "Special Elite", "Courier Prime", Courier, monospace;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --radius-0: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-pastille: 999px;
+  --ombre-dure: 4px 4px 0 rgba(11, 10, 9, 0.85);
+  --ombre-papier: 6px 8px 18px rgba(11, 10, 9, 0.6);
+  --ombre-carte: 0 2px 0 rgba(11, 10, 9, 0.9);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}

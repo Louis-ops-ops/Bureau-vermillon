@@ -1,0 +1,94 @@
+/* ---------- Extrait de dossier ----------
+   La table (encre-200) porte une déposition complète, lisible, sélectionnable. */
+.extrait { padding-block: var(--section); background: var(--encre-200); overflow: hidden; }
+
+.extrait__grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-10); }
+.extrait__texte { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+.extrait__texte .chapo { margin-top: 0; }
+
+.extrait__table { position: relative; }
+
+.extrait__piece { max-width: 620px; }
+.extrait__piece .piece__entete { margin-bottom: var(--space-3); }
+.extrait__temoin {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  margin-bottom: var(--space-5);
+}
+.extrait__corps { display: flex; flex-direction: column; gap: var(--space-4); }
+.extrait__bas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.extrait__signature { font-size: 18px; }
+
+/* Caviardage : la barre est un pseudo-élément mis à l'échelle (transform),
+   le texte reste en dessous, lisible dès qu'elle se retire. */
+.caviarde__mot { position: relative; display: inline-block; }
+.caviarde__mot::after {
+  content: "";
+  position: absolute;
+  inset: -.05em -.15em;
+  background: var(--encre-100);
+  transform: scaleX(var(--barre, 0));
+  transform-origin: right center;
+  pointer-events: none;
+}
+
+/* Notes de l'enquêteur, en laiton (seul accent qui passe en petit corps) */
+.extrait__notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--laiton-fonce);
+}
+.note {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--laiton);
+}
+
+.coupure {
+  max-width: 360px;
+  margin-top: var(--space-8);
+  padding: var(--space-5);
+  background: var(--papier-200);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.coupure__journal {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  border-bottom: 3px double var(--encre-100);
+  padding-bottom: 6px;
+  margin-bottom: var(--space-3);
+}
+.coupure__titre { font-size: 22px; line-height: 1.15; text-transform: uppercase; margin-bottom: var(--space-3); }
+
+@media (min-width: 1024px) {
+  .extrait__grille { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-10); align-items: start; }
+  .extrait__texte { position: sticky; top: calc(var(--nav-h) + var(--space-10)); }
+  .extrait__table { padding: var(--space-4) 0 200px; }
+  .extrait__piece { width: 74%; padding: var(--space-8); }
+
+  /* les notes passent dans la marge droite, à hauteur du paragraphe qu'elles annotent */
+  .extrait__notes { position: absolute; inset: 0 0 0 auto; width: 22%; margin: 0; padding: 0; border: 0; }
+  .note { position: absolute; left: 0; right: 0; padding-left: var(--space-4); border-left: 2px solid var(--laiton-fonce); }
+  .note--1 { top: 25%; }
+  .note--2 { top: 40%; }
+  .note--3 { top: 54%; }
+
+  .coupure { position: absolute; right: 18%; bottom: 0; width: 40%; max-width: 380px; margin: 0; }
+}

@@ -1,0 +1,25 @@
+/* ---------- Bandeau (le seul de la page) ---------- */
+.bandeau {
+  position: relative;
+  overflow: hidden;
+  background: var(--tampon);
+  border-block: 2px solid var(--encre-000);
+}
+.bandeau__piste { display: flex; width: max-content; will-change: transform; }
+.bandeau__groupe { display: flex; flex: none; }
+.bandeau__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-6) var(--space-4) 0;
+  white-space: nowrap;
+}
+.bandeau__mot {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 38px);
+  line-height: 1.1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--papier-100);
+}
+.bandeau__sep { flex: none; width: 10px; height: 10px; background: var(--encre-000); transform: rotate(45deg); }

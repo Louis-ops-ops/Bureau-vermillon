@@ -1,0 +1,76 @@
+/* ---------- Suspects ----------
+   Les portraits dans leur cadre rouge, sans ombre. */
+/* au-dessus de la section suivante pendant que les portraits glissent (Flip) */
+.suspects { position: relative; z-index: 1; padding-block: var(--section); }
+
+.suspects__haut { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: var(--space-10); }
+
+.filtres { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-8); }
+.filtre {
+  position: relative;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--papier-300);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--papier-200);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 140ms ease-out, color 140ms ease-out;
+}
+.filtre:hover { border-color: var(--laiton); color: var(--laiton); }
+.filtre[aria-pressed="true"] { border-color: var(--papier-100); color: var(--papier-100); }
+/* repère du filtre actif : un trait vermillon qui glisse d'un bouton à l'autre (Flip) */
+.filtres__curseur {
+  position: absolute;
+  left: 10px; right: 10px; bottom: -8px;
+  height: 3px;
+  background: var(--vermillon);
+}
+
+.grille-suspects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8) var(--space-4);
+}
+@media (min-width: 700px) {
+  .grille-suspects { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8) var(--space-5); }
+}
+@media (min-width: 1100px) {
+  .grille-suspects { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grille-suspects--univers { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1000px; gap: var(--space-8); }
+}
+@media (max-width: 699px) {
+  /* un univers seul sur deux colonnes : le premier portrait prend la ligne, pas de case vide */
+  .grille-suspects--univers .suspect--vedette { grid-column: 1 / -1; width: 72%; justify-self: center; }
+}
+
+.suspect[hidden] { display: none; }
+.suspect { display: flex; flex-direction: column; min-width: 0; }
+
+/* L'image est posée en absolu dans le cadre (5,5 % de marge) : elle ne peut pas
+   déborder sur le nom et le rôle, quelle que soit la taille de la colonne. */
+.suspects .suspect__cadre {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  transition: transform 140ms ease-out;
+}
+.suspects .suspect__cadre img {
+  position: absolute;
+  top: 5.5%; left: 5.5%;
+  width: 89%; height: 89%;
+  max-width: none;
+  object-fit: cover;
+}
+.suspect:hover .suspect__cadre { transform: translateY(-4px); }
+
+.suspects .suspect__nom { margin: var(--space-4) 0 0; line-height: 1.15; }
+.suspects .suspect__role { margin: var(--space-2) 0 0; line-height: 1.5; }
+.suspect__indice { margin-top: var(--space-1); font-size: 13px; line-height: 1.5; color: var(--laiton); }
+

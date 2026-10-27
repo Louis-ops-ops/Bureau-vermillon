@@ -1,0 +1,76 @@
+/* ---------- Comment on joue ---------- */
+.etapes { padding-top: var(--section); overflow: hidden; }
+
+.etapes__liste { margin-top: var(--space-10); }
+
+.etape {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--encre-300);
+}
+.etape:last-child { border-bottom: 1px solid var(--encre-300); }
+
+.etape__verbe {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(64px, 12.5vw, 196px);
+  line-height: 1.02;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+  padding-top: .16em; /* accents de TÉLÉCHARGE et ENQUÊTE : le masque du plein ne doit pas les rogner */
+}
+/* le mot lisible (lecteur d'écran, sélection) est le contour ;
+   l'encre pleine glisse par-dessus en deux translations opposées */
+.etape__contour {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--papier-300);
+}
+.etape__masque {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  padding-top: inherit;
+}
+.etape__plein { display: block; color: var(--papier-100); }
+
+.etape__corps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 38ch;
+  color: var(--papier-200);
+}
+
+@media (min-width: 900px) {
+  .etape {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    align-items: end;
+    gap: var(--space-10);
+    padding-block: var(--space-5);
+  }
+  .etape__corps { padding-bottom: 1.4vw; }
+}
+
+/* sans animation (mouvement réduit), le verbe est plein d'emblée */
+@media (prefers-reduced-motion: reduce) {
+  .etape__contour { color: var(--papier-100); -webkit-text-stroke: 0; }
+  .etape__masque { display: none; }
+}
+
+.etapes__table {
+  position: relative;
+  margin-top: var(--space-12);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  transform-origin: center top;
+  will-change: transform;
+}
+.etapes__table img { object-fit: cover; }
+@media (max-width: 767px) {
+  .etapes__table { aspect-ratio: 4 / 3; }
+  .etapes__table img { object-position: 42% center; }
+}

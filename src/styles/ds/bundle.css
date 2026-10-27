@@ -1,0 +1,318 @@
+/* Enquetes a imprimer — feuille de style du systeme.
+   Chargee apres tokens.css. Aucune dependance JS.
+   Les masques de peinture sont embarques en data-URI : un seul fichier a deployer,
+   zero requete reseau, recolorisable par univers. */
+
+/* ------------------------------------------------------------------ *
+ * 1. Masques
+ * ------------------------------------------------------------------ */
+:root {
+  --masque-cap-g: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2030%2056%22%20preserveAspectRatio=%22none%22%3E%3Cpath%20fill=%22%23000%22%20d=%22M30%202.5%20L19.5%203.2%20C14%203.6%209.5%202.2%206.4%205.1%20C3.2%208%204.6%2011.5%202.9%2014.2%20C1.1%2017%20-0.4%2019.6%200.6%2023.1%20C1.5%2026.2%203.4%2027.4%203.3%2029.4%20C3.2%2031.6%201.2%2033%201.6%2036.4%20C2%2039.8%204.4%2041.1%204.9%2043.6%20C5.4%2046.2%203.9%2048.6%206.8%2050.9%20C9.7%2053.2%2014.6%2052.4%2019.8%2052.9%20L30%2053.6%20Z%22/%3E%3Cpath%20fill=%22%23000%22%20d=%22M7.1%207.4%20c-2.6%201.1%20-4%203.2%20-3.1%204.4%20.9%201.2%203.4%20.6%204.6%20-1%201.2%20-1.6%20.6%20-4.2%20-1.5%20-3.4z%22/%3E%3Cpath%20fill=%22%23000%22%20d=%22M5.6%2045.1%20c-2.3%20.4%20-3.6%202.3%20-2.6%203.6%201%201.3%203.5%201%204.4%20-.5%20.9%20-1.5%20-.1%20-3.4%20-1.8%20-3.1z%22/%3E%3C/svg%3E");
+  --masque-milieu: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2040%2056%22%20preserveAspectRatio=%22none%22%3E%3Cpath%20fill=%22%23000%22%20d=%22M0%202.5%20C5.5%201.1%208.2%203.4%2013.4%202.1%20C18.6%200.8%2022.1%203.9%2027.3%202.6%20C32.5%201.3%2035.2%203.5%2040%202.5%20L40%2053.6%20C35.2%2054.7%2032.5%2052.3%2027.3%2053.5%20C22.1%2054.7%2018.6%2051.8%2013.4%2053.1%20C8.2%2054.4%205.5%2052.1%200%2053.6%20Z%22/%3E%3C/svg%3E");
+  --masque-cap-d: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2030%2056%22%20preserveAspectRatio=%22none%22%3E%3Cpath%20fill=%22%23000%22%20d=%22M0%202.5%20L11.4%202.9%20C17.2%203.1%2022.6%201.4%2025.4%204.6%20C28.2%207.8%2025.9%2011.2%2027.1%2014.1%20C28.4%2017%2030.2%2019.1%2029.5%2022.6%20C28.9%2025.8%2026.8%2027.2%2026.9%2029.3%20C27%2031.5%2029.3%2033.1%2028.7%2036.5%20C28.1%2039.9%2025.4%2041%2024.8%2043.5%20C24.2%2046.1%2026.1%2048.9%2022.9%2051%20C19.7%2053.1%2015.1%2052.3%2010.6%2052.7%20L0%2053.6%20Z%22/%3E%3Cpath%20fill=%22%23000%22%20d=%22M25.8%208.1%20c2.4%201.4%203.4%203.7%202.3%204.7%20-1.1%201%20-3.5%20.1%20-4.4%20-1.6%20-.9%20-1.7%20.1%20-4.2%202.1%20-3.1z%22/%3E%3Cpath%20fill=%22%23000%22%20d=%22M27.4%2046.2%20c1.9%20.8%202.8%202.6%201.9%203.6%20-.9%201%20-3.1%20.5%20-3.8%20-.9%20-.7%20-1.4%20.3%20-3.3%201.9%20-2.7z%22/%3E%3C/svg%3E");
+  --masque-bord-encre: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20125%22%20preserveAspectRatio=%22none%22%3E%3Cpath%20fill=%22%23000%22%20d=%22M3.2%204.1%20C14%202.2%2022%204.6%2033.5%203.1%20C45%201.6%2052.4%204.4%2063.8%203%20C75.2%201.6%2084.1%204.8%2096.4%203.3%20C98.1%2013%2095.9%2021.4%2097.2%2032.8%20C98.5%2044.2%2095.6%2051.9%2096.9%2063.4%20C98.2%2074.9%2095.4%2083.1%2096.8%2094.7%20C98.2%20106.3%2095.3%20113.6%2096.6%20121.3%20C84.8%20123.2%2076.4%20120.6%2064.9%20122.1%20C53.4%20123.6%2046.2%20120.8%2034.7%20122.2%20C23.2%20123.6%2014.6%20120.5%203.4%20122%20C1.9%20112.1%204.2%20103.8%202.9%2092.3%20C1.6%2080.8%204.5%2073.3%203.2%2061.8%20C1.9%2050.3%204.7%2042.2%203.3%2030.6%20C1.9%2019%204.6%2011.9%203.2%204.1%20Z%22/%3E%3C/svg%3E");
+  --cap: 30px;              /* largeur des extremites non etirees */
+}
+
+/* ------------------------------------------------------------------ *
+ * 2. Accent par univers — pose data-univers sur une section ou le <body>
+ * ------------------------------------------------------------------ */
+[data-univers="policier"]  { --accent: var(--policier-bleu);     --accent-2: var(--policier-orange); }
+[data-univers="narcos"]    { --accent: var(--narcos-turquoise);  --accent-2: var(--narcos-peche); }
+[data-univers="viking"]    { --accent: var(--viking-teal);       --accent-2: var(--viking-ocre); }
+[data-univers="chevalier"] { --accent: var(--chevalier-acier);   --accent-2: var(--chevalier-or); }
+:root, [data-univers="neutre"] { --accent: var(--vermillon); --accent-2: var(--laiton); }
+
+/* ------------------------------------------------------------------ *
+ * 3. Bouton peinture — l'action principale. UN SEUL par ecran.
+ * ------------------------------------------------------------------ */
+.btn-peinture {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  min-width: 44px;
+  padding: var(--space-3) var(--space-6);
+  border: 0;
+  background: none;
+  color: var(--papier-100);
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* le trace : 3 couches — extremite gauche fixe, milieu etire, extremite droite fixe.
+   Sans ca, un seul SVG etire deforme les bouts de pinceau. */
+.btn-peinture::before {
+  content: "";
+  position: absolute;
+  inset: -4px -2px;
+  z-index: -1;
+  background: var(--vermillon);
+  -webkit-mask-image: var(--masque-cap-g), var(--masque-milieu), var(--masque-cap-d);
+  mask-image: var(--masque-cap-g), var(--masque-milieu), var(--masque-cap-d);
+  -webkit-mask-position: left center, center center, right center;
+  mask-position: left center, center center, right center;
+  -webkit-mask-size: var(--cap) 100%, calc(100% - var(--cap) * 2 + 2px) 100%, var(--cap) 100%;
+  mask-size: var(--cap) 100%, calc(100% - var(--cap) * 2 + 2px) 100%, var(--cap) 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  transition: transform 140ms ease-out, filter 140ms ease-out;
+}
+
+/* seconde passe de peinture, revelee au survol : l'encre « prend » */
+.btn-peinture::after {
+  content: "";
+  position: absolute;
+  inset: -4px -2px;
+  z-index: -2;
+  background: var(--tampon-fonce);
+  opacity: 0;
+  -webkit-mask-image: var(--masque-cap-g), var(--masque-milieu), var(--masque-cap-d);
+  mask-image: var(--masque-cap-g), var(--masque-milieu), var(--masque-cap-d);
+  -webkit-mask-position: left center, center center, right center;
+  mask-position: left center, center center, right center;
+  -webkit-mask-size: var(--cap) 100%, calc(100% - var(--cap) * 2 + 2px) 100%, var(--cap) 100%;
+  mask-size: var(--cap) 100%, calc(100% - var(--cap) * 2 + 2px) 100%, var(--cap) 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  transform: translate(3px, 3px) rotate(-.6deg);
+  transition: opacity 140ms ease-out;
+}
+
+.btn-peinture:hover::before { transform: scale(1.015) rotate(-.4deg); }
+.btn-peinture:hover::after  { opacity: 1; }
+.btn-peinture:active        { transform: translateY(1px); }
+.btn-peinture:active::before{ transform: scale(.995); filter: brightness(.9); }
+
+/* variante univers : le trace prend la couleur de l'univers, pas le rouge */
+.btn-peinture--univers::before { background: var(--accent-2); }
+.btn-peinture--univers         { color: var(--encre-100); }
+
+.btn-peinture--large { font-size: 28px; min-height: 68px; padding: var(--space-4) var(--space-8); --cap: 36px; }
+.btn-peinture--plein { display: flex; width: 100%; }
+
+.btn-peinture[disabled],
+.btn-peinture[aria-disabled="true"] { cursor: not-allowed; color: var(--papier-300); }
+.btn-peinture[disabled]::before,
+.btn-peinture[aria-disabled="true"]::before { background: var(--encre-300); }
+.btn-peinture[disabled]::after,
+.btn-peinture[aria-disabled="true"]::after { display: none; }
+
+/* ------------------------------------------------------------------ *
+ * 4. Bouton tampon — action secondaire, cadre encre
+ * ------------------------------------------------------------------ */
+.btn-tampon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-5);
+  border: 2px solid var(--papier-300);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--papier-100);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 140ms ease-out, color 140ms ease-out, background-color 140ms ease-out;
+}
+.btn-tampon:hover { border-color: var(--laiton); color: var(--laiton); background: rgba(200, 162, 74, .07); }
+.btn-tampon:active { transform: translateY(1px); }
+
+/* ------------------------------------------------------------------ *
+ * 5. Lien stylo — action tertiaire
+ * ------------------------------------------------------------------ */
+.lien-stylo {
+  color: var(--laiton);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+  transition: text-decoration-color 140ms ease-out;
+}
+.lien-stylo:hover { text-decoration-color: var(--vermillon); }
+
+/* ------------------------------------------------------------------ *
+ * 6. Focus — rectangulaire, jamais cale sur le trace de peinture
+ * ------------------------------------------------------------------ */
+.btn-peinture:focus-visible,
+.btn-tampon:focus-visible,
+.lien-stylo:focus-visible,
+.carte-univers:focus-visible {
+  outline: 2px solid var(--laiton);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+/* ------------------------------------------------------------------ *
+ * 7. Tampon meta — duree, joueurs, difficulte, pages
+ * ------------------------------------------------------------------ */
+.tampon-meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 6px var(--space-3);
+  border: 1.5px solid var(--papier-300);
+  border-radius: var(--radius-xs);
+  color: var(--papier-200);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tampon-meta b { color: var(--papier-100); font-weight: 700; letter-spacing: .04em; }
+.tampon-meta--fort { border-color: var(--vermillon); color: var(--vermillon); transform: rotate(-1.5deg); }
+.tampon-meta--laiton { border-color: var(--laiton); color: var(--laiton); }
+
+/* ------------------------------------------------------------------ *
+ * 8. Portrait de suspect — cadre rouge en CSS, bord d'encre en masque
+ * ------------------------------------------------------------------ */
+.suspect { display: block; text-decoration: none; color: inherit; }
+.suspect__cadre {
+  background: var(--vermillon);
+  padding: 5.5%;
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--ombre-dure);
+}
+.suspect__cadre img,
+.suspect__cadre .ph {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
+  -webkit-mask-image: var(--masque-bord-encre);
+  mask-image: var(--masque-bord-encre);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.suspect__nom {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--papier-100);
+}
+.suspect__role {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--papier-300);
+}
+
+/* ------------------------------------------------------------------ *
+ * 9. Piece de dossier — le seul endroit ou l'on quitte le fond encre
+ * ------------------------------------------------------------------ */
+.piece {
+  background: var(--papier-100);
+  color: var(--encre-100);
+  padding: var(--space-6);
+  box-shadow: var(--ombre-papier);
+  font-family: var(--font-document);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.piece--a  { transform: rotate(-1.4deg); }
+.piece--b  { transform: rotate(.9deg); }
+.piece__entete {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tampon);
+  border-bottom: 1.5px solid var(--encre-100);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.piece__tampon {
+  display: inline-block;
+  border: 2.5px solid var(--tampon);
+  color: var(--tampon);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transform: rotate(-7deg);
+  opacity: .82;
+}
+
+/* ------------------------------------------------------------------ *
+ * 10. Carte univers
+ * ------------------------------------------------------------------ */
+.carte-univers {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--encre-200);
+  border-radius: var(--radius-xs);
+  text-decoration: none;
+  isolation: isolate;
+}
+.carte-univers__fond { position: absolute; inset: 0; z-index: -2; }
+.carte-univers::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, var(--encre-000) 8%, rgba(11, 10, 9, .55) 45%, rgba(11, 10, 9, .05) 100%);
+}
+.carte-univers__contenu { position: absolute; left: 0; bottom: 0; padding: var(--space-5); }
+.carte-univers__titre {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: .95;
+  text-transform: uppercase;
+  color: var(--papier-100);
+}
+.carte-univers__trait { display: block; width: 44px; height: 4px; background: var(--accent-2); margin-bottom: var(--space-3); }
+.carte-univers:hover .carte-univers__trait { width: 72px; }
+.carte-univers__trait { transition: width 160ms ease-out; }
+
+/* ------------------------------------------------------------------ *
+ * 11. Grain global — un seul element fixe, pas une texture par section
+ * ------------------------------------------------------------------ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22180%22%20height=%22180%22%3E%3Cfilter%20id=%22g%22%3E%3CfeTurbulence%20type=%22fractalNoise%22%20baseFrequency=%220.85%22%20numOctaves=%223%22%20stitchTiles=%22stitch%22/%3E%3CfeColorMatrix%20type=%22saturate%22%20values=%220%22/%3E%3C/filter%3E%3Crect%20width=%22180%22%20height=%22180%22%20filter=%22url%28%23g%29%22/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 12. Mouvement reduit
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .btn-peinture::before, .btn-peinture::after, .btn-tampon,
+  .lien-stylo, .carte-univers__trait { transition: none; }
+  .btn-peinture:hover::before { transform: none; }
+}

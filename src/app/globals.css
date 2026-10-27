@@ -1,0 +1,18 @@
+/* Design system (copié depuis ../design-system par scripts/sync-assets.mjs) */
+@import "../styles/ds/tokens.css";
+@import "../styles/ds/bundle.css";
+
+/* Sections de la landing */
+@import "../styles/base.css";
+@import "../styles/nav.css";
+@import "../styles/hero.css";
+@import "../styles/bandeau.css";
+@import "../styles/recois.css";
+@import "../styles/etapes.css";
+@import "../styles/univers.css";
+@import "../styles/extrait.css";
+@import "../styles/suspects.css";
+@import "../styles/resolution.css";
+@import "../styles/faq.css";
+@import "../styles/gratuit.css";
+@import "../styles/pied.css";

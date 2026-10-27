@@ -1,0 +1,94 @@
+/* ---------- Les univers ----------
+   Mobile : cartes empilées, recadrées en 4:5 sur le personnage.
+   Bureau : piste horizontale épinglée (intro + 4 cartes). */
+.univers { position: relative; background: var(--encre-000); padding-block: var(--section); }
+
+.univers__piste {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-inline: max(var(--gouttiere), env(safe-area-inset-left, 0px));
+}
+.univers__intro { margin-bottom: var(--space-6); }
+
+.univers__carte.carte-univers {
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--ombre-carte);
+}
+.univers__carte .carte-univers__fond { object-fit: cover; }
+.univers__carte .carte-univers__contenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+.univers__carte .carte-univers__titre {
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.06;
+  padding-top: .04em;
+}
+.univers__epoque {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+.univers__pitch { max-width: 40ch; color: var(--papier-200); font-size: 15px; line-height: 1.55; }
+.univers__carte:hover .carte-univers__titre { color: var(--papier-100); }
+
+/* Bureau sans animation (mouvement réduit) : grille 2 × 2, tout reste atteignable sans piste */
+@media (min-width: 1024px) {
+  .univers__piste { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1440px; margin-inline: auto; }
+  .univers__intro { grid-column: 1 / -1; }
+  .univers__carte.carte-univers { aspect-ratio: 16 / 9; }
+  .univers__carte .carte-univers__contenu { padding: var(--space-8); }
+}
+
+/* Bureau animé : piste horizontale épinglée */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .univers { height: 100dvh; min-height: 640px; padding: 0; overflow: hidden; }
+  .univers__piste {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+    width: max-content;
+    max-width: none;
+    margin: 0;
+    height: 100%;
+    padding: calc(var(--nav-h) + var(--space-5)) var(--gouttiere) var(--space-8);
+    will-change: transform;
+  }
+  .univers__intro { flex: none; width: min(34vw, 520px); margin: 0 var(--space-6) 0 0; }
+  .univers__carte.carte-univers {
+    flex: none;
+    width: 66vw;
+    height: min(76dvh, 37vw);
+    aspect-ratio: auto;
+  }
+  /* le key art déborde de 14 % pour la parallaxe horizontale */
+  .univers__carte .carte-univers__fond { inset: 0 -7%; width: 114% !important; }
+}
+
+/* Étiquette de curseur : suit le pointeur, n'en remplace pas le dessin */
+.curseur-etiquette {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: var(--z-curseur);
+  margin: 18px 0 0 18px;
+  padding: 8px 12px;
+  border: 2px solid var(--vermillon);
+  background: var(--encre-000);
+  color: var(--papier-100);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.8);
+}
