@@ -38,7 +38,7 @@
 .univers__pitch { max-width: 40ch; color: var(--papier-200); font-size: 15px; line-height: 1.55; }
 .univers__carte:hover .carte-univers__titre { color: var(--papier-100); }
 
-/* Bureau sans animation (mouvement réduit) : grille 2 × 2, tout reste atteignable sans piste */
+/* Bureau sans animation (mouvement réduit) : grille de deux colonnes, tout reste atteignable sans piste */
 @media (min-width: 1024px) {
   .univers__piste { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1440px; margin-inline: auto; }
   .univers__intro { grid-column: 1 / -1; }

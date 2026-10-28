@@ -20,7 +20,7 @@ const specialElite = Special_Elite({
 export const metadata: Metadata = {
   title: "Enquêtes à imprimer chez soi, de 1 à 6 joueurs",
   description:
-    "Des enquêtes illustrées à imprimer : un dossier, des suspects, une solution protégée par un code. Policier, Narcos, Viking, Chevalier. Téléchargement immédiat.",
+    "Des enquêtes illustrées à imprimer : un dossier, des suspects, une solution protégée par un code. Policier, Narcos, Cyberpunk, Viking, Hôtel, Chevalier. Téléchargement immédiat.",
 };
 
 export const viewport: Viewport = {

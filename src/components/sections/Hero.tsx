@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { gsap, MQ, useGSAP } from "@/lib/gsap";
 
@@ -54,9 +55,9 @@ export function Hero() {
           Des enquêtes illustrées à imprimer chez toi. Un achat, un dossier, une soirée pour démasquer le coupable.
         </p>
         <div className="hero__actions">
-          <a className="btn-peinture btn-peinture--large" href="#univers">
+          <Link className="btn-peinture btn-peinture--large" href="/enquetes">
             Voir les enquêtes
-          </a>
+          </Link>
           <a className="btn-tampon" href="#gratuit">
             Essayer gratuitement
           </a>

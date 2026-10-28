@@ -19,7 +19,9 @@
  * ------------------------------------------------------------------ */
 [data-univers="policier"]  { --accent: var(--policier-bleu);     --accent-2: var(--policier-orange); }
 [data-univers="narcos"]    { --accent: var(--narcos-turquoise);  --accent-2: var(--narcos-peche); }
+[data-univers="cyberpunk"] { --accent: var(--cyberpunk-nuit);    --accent-2: var(--cyberpunk-rose); }
 [data-univers="viking"]    { --accent: var(--viking-teal);       --accent-2: var(--viking-ocre); }
+[data-univers="hotel"]     { --accent: var(--hotel-velours);     --accent-2: var(--hotel-champagne); }
 [data-univers="chevalier"] { --accent: var(--chevalier-acier);   --accent-2: var(--chevalier-or); }
 :root, [data-univers="neutre"] { --accent: var(--vermillon); --accent-2: var(--laiton); }
 

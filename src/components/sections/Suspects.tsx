@@ -7,9 +7,11 @@ import { Flip, gsap, MQ, reveleTitre, useGSAP } from "@/lib/gsap";
 
 type Filtre = UniversId | "tous";
 
-const FILTRES: { id: Filtre; label: string }[] = [{ id: "tous", label: "Tous" }, ...UNIVERS.map((u) => ({ id: u.id, label: u.nom }))];
+// seuls les univers dont les portraits existent ont un filtre (Cyberpunk et Hôtel n'en ont pas encore)
+const AVEC_SUSPECTS = UNIVERS.filter((u) => SUSPECTS.some((s) => s.univers === u.id));
+const FILTRES: { id: Filtre; label: string }[] = [{ id: "tous", label: "Tous" }, ...AVEC_SUSPECTS.map((u) => ({ id: u.id, label: u.nom }))];
 /** premier suspect de chaque univers : il prend toute la ligne sur mobile */
-const premier = Object.fromEntries(UNIVERS.map((u) => [u.id, SUSPECTS.find((s) => s.univers === u.id)!.id])) as Record<UniversId, string>;
+const premier = Object.fromEntries(AVEC_SUSPECTS.map((u) => [u.id, SUSPECTS.find((s) => s.univers === u.id)!.id])) as Record<UniversId, string>;
 const NOM_UNIVERS = Object.fromEntries(UNIVERS.map((u) => [u.id, u.nom])) as Record<UniversId, string>;
 
 export function Suspects() {

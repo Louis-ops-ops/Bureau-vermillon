@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { UNIVERS } from "@/content/landing";
 import { gsap, MQ, reveleTitre, ScrollTrigger, useGSAP } from "@/lib/gsap";
@@ -16,7 +17,7 @@ export function Univers() {
       const section = ref.current!;
       reveleTitre(section.querySelector(".univers__titre")!);
 
-      // Bureau : défilement horizontal épinglé. On traverse les quatre époques une par une,
+      // Bureau : défilement horizontal épinglé. On traverse les six époques une par une,
       // comme on feuillette des chemises ; le key art glisse un peu moins vite que sa carte
       // (parallaxe légère, sans zoom : les peintures restent nettes).
       mm.add(MQ.bureau, () => {
@@ -105,7 +106,7 @@ export function Univers() {
       <div className="univers__piste">
         <div className="univers__intro">
           <h2 id="univers-titre" className="titre univers__titre">
-            Quatre époques, quatre affaires
+            Six époques, six affaires
           </h2>
           <p className="chapo">
             Chaque univers a sa palette, ses suspects et son dossier. La règle ne change pas : un coupable, et il est dans la pièce.
@@ -113,7 +114,7 @@ export function Univers() {
         </div>
 
         {UNIVERS.map((u) => (
-          <a key={u.id} className="carte-univers univers__carte" href={`/univers/${u.id}`} data-univers={u.id}>
+          <Link key={u.id} className="carte-univers univers__carte" href={`/enquetes?univers=${u.id}`} data-univers={u.id}>
             <Image
               className="carte-univers__fond"
               src={`/img/key-art/key-art-${u.id}.webp`}
@@ -128,7 +129,7 @@ export function Univers() {
               <h3 className="carte-univers__titre">{u.nom}</h3>
               <span className="univers__pitch">{u.pitch}</span>
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

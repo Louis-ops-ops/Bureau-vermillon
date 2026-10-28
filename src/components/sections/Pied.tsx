@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { MARQUE, UNIVERS } from "@/content/landing";
 import { gsap, MQ, useGSAP } from "@/lib/gsap";
@@ -45,7 +46,7 @@ export function Pied() {
             <ul>
               {UNIVERS.map((u) => (
                 <li key={u.id}>
-                  <a href={`/univers/${u.id}`}>{u.nom}</a>
+                  <Link href={`/enquetes?univers=${u.id}`}>{u.nom}</Link>
                 </li>
               ))}
             </ul>
@@ -57,7 +58,10 @@ export function Pied() {
                 <a href="/comment-ca-marche">Comment ça marche</a>
               </li>
               <li>
-                <a href="#faq">Questions fréquentes</a>
+                <Link href="/#faq">Questions fréquentes</Link>
+              </li>
+              <li>
+                <Link href="/panier">Panier</Link>
               </li>
               <li>
                 <a href="/solution">Entrer un code de solution</a>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Fragment, useRef } from "react";
 import { gsap, MQ, reveleTitre, useGSAP } from "@/lib/gsap";
 
@@ -68,19 +69,19 @@ export function Extrait() {
             Lis une vraie pièce du dossier
           </h2>
           <p className="chapo">
-            La déposition du patron du Balto, en entier, telle qu&apos;elle sera dans ton dossier. Elle ne donne pas
+            La déposition du patron du Cyrano, en entier, telle qu&apos;elle sera dans ton dossier. Elle ne donne pas
             la solution. Mais quelqu&apos;un, dedans, ne dit pas tout.
           </p>
-          <a className="lien-stylo" href="/univers/policier">
-            Voir l&apos;univers Policier
-          </a>
+          <Link className="lien-stylo" href="/enquetes?univers=policier">
+            Voir l&apos;enquête « Dernière tournée »
+          </Link>
         </div>
 
         <div className="extrait__table" data-univers="policier">
           <article className="piece piece--a extrait__piece" aria-label="Pièce numéro 4, déposition de Marcel Tonnelier">
             <p className="piece__entete">Pièce n° 04 · Déposition du 15 mars 1974</p>
             <p className="extrait__temoin">
-              Témoin : Marcel Tonnelier, 52 ans, patron du café Le Balto, Paris 11e.
+              Témoin : Marcel Tonnelier, 52 ans, patron du café Le Cyrano, Paris 11e.
             </p>
 
             <div className="extrait__corps">
@@ -119,7 +120,7 @@ export function Extrait() {
             <p className="coupure__journal">La Gazette du Faubourg, 16 mars 1974</p>
             <p className="coupure__titre">Un habitué retrouvé mort derrière un café</p>
             <p>
-              Raymond Ferrand, 47 ans, a été découvert hier matin dans la cour du Balto. La police n&apos;écarte
+              Raymond Ferrand, 47 ans, a été découvert hier matin dans la cour du Cyrano. La police n&apos;écarte
               aucune piste.
             </p>
           </article>

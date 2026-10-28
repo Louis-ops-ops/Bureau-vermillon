@@ -16,3 +16,7 @@
 @import "../styles/faq.css";
 @import "../styles/gratuit.css";
 @import "../styles/pied.css";
+
+/* Boutique et panier */
+@import "../styles/boutique.css";
+@import "../styles/panier.css";

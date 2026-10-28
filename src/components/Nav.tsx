@@ -1,20 +1,43 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MARQUE } from "@/content/landing";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { usePanier } from "@/lib/panier";
 
 const LIENS = [
-  { href: "#univers", label: "Enquêtes" },
-  { href: "#comment", label: "Comment ça marche" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/enquetes", label: "Enquêtes" },
+  { href: "/#comment", label: "Comment ça marche" },
+  { href: "/#faq", label: "FAQ" },
 ];
+
+/** Lien panier : le compteur est remonté à chaque changement pour rejouer le coup de tampon. */
+function LienPanier({ onClick }: { onClick?: () => void }) {
+  const { articles } = usePanier();
+  const n = articles?.length ?? 0;
+  return (
+    <Link
+      className="nav__panier"
+      href="/panier"
+      onClick={onClick}
+      aria-label={n ? `Panier, ${n} enquête${n > 1 ? "s" : ""}` : "Panier, vide"}
+    >
+      Panier
+      {n > 0 && (
+        <span className="nav__compte" key={n} aria-hidden="true">
+          {n}
+        </span>
+      )}
+    </Link>
+  );
+}
 
 export function Nav() {
   const ref = useRef<HTMLElement>(null);
   const [ouvert, setOuvert] = useState(false);
 
-  // Fond plein dès qu'on quitte le haut du hero ; la barre s'efface quand on descend
+  // Fond plein dès qu'on quitte le haut de page ; la barre s'efface quand on descend
   // et revient dès qu'on remonte : la lecture garde tout l'écran, la nav reste à un geste.
   useGSAP(
     () => {
@@ -26,13 +49,19 @@ export function Nav() {
         onToggle: (self) => nav.classList.toggle("nav--pleine", self.isActive),
       });
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cache = gsap.quickTo(nav, "yPercent", { duration: 0.16, ease: "power1.out" });
+        const glisse = gsap.quickTo(nav, "yPercent", { duration: 0.16, ease: "power1.out" });
+        // la classe sur <html> laisse les barres collées sous la nav (filtres de la boutique) suivre
+        const cacher = (oui: boolean) => {
+          glisse(oui ? -100 : 0);
+          document.documentElement.classList.toggle("nav-cachee", oui);
+        };
         ScrollTrigger.create({
           start: 400,
           end: "max",
-          onUpdate: (self) => cache(self.direction === 1 && !nav.contains(document.activeElement) ? -100 : 0),
-          onLeaveBack: () => cache(0),
+          onUpdate: (self) => cacher(self.direction === 1 && !nav.contains(document.activeElement)),
+          onLeaveBack: () => cacher(false),
         });
+        return () => document.documentElement.classList.remove("nav-cachee");
       });
     },
     { scope: ref },
@@ -48,22 +77,24 @@ export function Nav() {
   return (
     <header ref={ref} className={`nav${ouvert ? " nav--ouverte" : ""}`}>
       <div className="wrap nav__in">
-        <a className="marque" href="#contenu" aria-label={`${MARQUE}, retour en haut`}>
+        <Link className="marque" href="/" aria-label={`${MARQUE}, accueil`}>
           <span className="marque__barre" aria-hidden="true" />
           {MARQUE}
-        </a>
+        </Link>
 
         <nav aria-label="Principale" className="nav__liens">
           {LIENS.map((l) => (
-            <a key={l.href} href={l.href}>
+            <Link key={l.href} href={l.href}>
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a className="btn-tampon nav__cta" href="#gratuit">
+        <LienPanier />
+
+        <Link className="btn-tampon nav__cta" href="/#gratuit">
           Essayer gratuitement
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -79,13 +110,13 @@ export function Nav() {
       <div id="menu-mobile" className="nav__tiroir" hidden={!ouvert}>
         <nav aria-label="Menu mobile" className="wrap">
           {LIENS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOuvert(false)}>
+            <Link key={l.href} href={l.href} onClick={() => setOuvert(false)}>
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a className="btn-tampon" href="#gratuit" onClick={() => setOuvert(false)}>
+          <Link className="btn-tampon" href="/#gratuit" onClick={() => setOuvert(false)}>
             Essayer gratuitement
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

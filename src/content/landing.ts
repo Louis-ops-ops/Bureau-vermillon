@@ -7,7 +7,7 @@ export const PAGES = 5;
 /** Chiffre de maquette validé : à remplacer par la mesure réelle des codes de solution. */
 export const TAUX_RESOLUTION = 40;
 
-export type UniversId = "policier" | "narcos" | "viking" | "chevalier";
+export type UniversId = "policier" | "narcos" | "cyberpunk" | "viking" | "hotel" | "chevalier";
 
 export type Univers = {
   id: UniversId;
@@ -24,7 +24,7 @@ export const UNIVERS: Univers[] = [
     id: "policier",
     nom: "Policier",
     epoque: "Paris, années 70",
-    pitch: "Un habitué du Balto retrouvé dans la cour. Trois témoins, trois versions.",
+    pitch: "Un habitué du Cyrano retrouvé dans la cour. Trois témoins, trois versions.",
     cadrage: "30% center",
   },
   {
@@ -35,18 +35,32 @@ export const UNIVERS: Univers[] = [
     cadrage: "78% center",
   },
   {
+    id: "cyberpunk",
+    nom: "Cyberpunk",
+    epoque: "Néo-Lyon, 2087",
+    pitch: "Il pleut depuis dix ans sur la ville basse. Un implant a tout vu, sauf le visage du coupable.",
+    cadrage: "22% center",
+  },
+  {
     id: "viking",
     nom: "Viking",
     epoque: "Fjords, an 900",
     pitch: "Le jarl est mort pendant le festin d'hiver. Personne n'a quitté la halle.",
-    cadrage: "50% center",
+    cadrage: "58% center",
+  },
+  {
+    id: "hotel",
+    nom: "Hôtel",
+    epoque: "Riviera, années 30",
+    pitch: "Le grand hôtel affiche complet. Le client de la suite 12 ne descendra pas dîner.",
+    cadrage: "80% center",
   },
   {
     id: "chevalier",
     nom: "Chevalier",
     epoque: "Bourgogne, 1350",
     pitch: "Le sceau de l'abbaye est brisé et le messager du duc ne repartira pas.",
-    cadrage: "72% center",
+    cadrage: "94% center",
   },
 ];
 

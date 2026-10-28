@@ -101,8 +101,50 @@
 }
 .nav__tiroir .btn-tampon { margin-top: var(--space-4); }
 
+/* Lien panier : toujours visible, même sur mobile (c'est là qu'on achète) */
+.nav__panier {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--papier-100);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 140ms ease-out;
+}
+.nav__panier:hover { color: var(--laiton); }
+/* compteur : encre sur laiton (contraste 7,8:1), posé comme un tampon à chaque changement */
+.nav__compte {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 5px;
+  background: var(--laiton);
+  color: var(--encre-100);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  border-radius: var(--radius-xs);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nav__compte { animation: nav-tamponne 220ms ease-out both; }
+}
+@keyframes nav-tamponne {
+  from { opacity: 0; transform: rotate(-7deg) scale(1.5); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 899.98px) {
+  .nav__in { gap: var(--space-4); }
+}
 @media (min-width: 900px) {
   .nav__liens { display: flex; }
-  .nav__cta { display: inline-flex; }
   .nav__menu, .nav__tiroir { display: none !important; }
+}
+@media (min-width: 1100px) {
+  .nav__cta { display: inline-flex; }
 }

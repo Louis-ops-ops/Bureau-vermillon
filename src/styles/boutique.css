@@ -1,0 +1,261 @@
+/* ---------- Boutique (/enquetes) ----------
+   Retenue façon Palace : l'image porte tout, le texte d'interface reste petit.
+   Le seul cri de la page, ce sont les key arts et les titres en affiche. */
+.boutique { padding-top: calc(var(--nav-h) + var(--space-10)); padding-bottom: var(--section); }
+
+.boutique__tete { padding-bottom: var(--space-8); }
+.boutique__titre {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(64px, 11vw, 176px);
+  line-height: 1.02;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+  color: var(--papier-100);
+  padding-top: .06em; /* accent du Ê */
+}
+.boutique__tete .chapo { margin-top: var(--space-4); }
+
+/* ---------- Filtres ----------
+   Une seule ligne, collée sous la nav. Elle part avec la nav quand on descend
+   (classe .nav-cachee posée par Nav.tsx) et revient avec elle : les filtres restent
+   à un geste sans manger l'écran pendant qu'on regarde les dossiers. */
+.boutique { --filtres-h: 78px; }
+.filtres-boutique {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: calc(var(--z-nav) - 1);
+  background: var(--encre-100);
+  border-block: 1px solid var(--encre-300);
+  transition: transform 160ms ease-out;
+}
+.nav-cachee .filtres-boutique { transform: translateY(calc(-100% - var(--nav-h))); }
+/* au clavier, la barre ne part jamais avec le focus dedans */
+.nav-cachee .filtres-boutique:focus-within { transform: none; }
+
+.filtres-boutique__in {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: calc(var(--filtres-h) - 2px);
+  padding-block: var(--space-3);
+}
+
+/* Liste déroulante : le libellé est posé dans le cadre, au-dessus de la valeur,
+   et le <select> couvre tout le cadre (tout est cliquable, l'anneau de focus l'entoure). */
+.choix { position: relative; flex: 1 1 0; min-width: 0; }
+.choix__libelle {
+  position: absolute;
+  top: 7px; left: 13px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--papier-300);
+  pointer-events: none;
+}
+.choix__select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: 22px 36px 7px 12px;
+  border: 1.5px solid var(--papier-300);
+  border-radius: var(--radius-xs);
+  background: var(--encre-100);
+  color: var(--papier-100);
+  color-scheme: dark;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: .04em;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: border-color 140ms ease-out;
+}
+.choix__select:hover { border-color: var(--laiton); }
+/* chevron dessiné en bordures : pas d'image, recolorable */
+.choix::after {
+  content: "";
+  position: absolute;
+  right: 15px; top: 50%;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid var(--papier-200);
+  border-bottom: 1.5px solid var(--papier-200);
+  transform: translateY(-75%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Onglets d'univers : bureau seulement (sur téléphone, la liste prend le relais) */
+.filtres-boutique__onglets { display: none; }
+.onglet {
+  position: relative;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  background: none;
+  color: var(--papier-200);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 140ms ease-out;
+}
+.onglet:hover { color: var(--laiton); }
+.onglet[aria-pressed="true"] { color: var(--papier-100); }
+.onglet .filtres__curseur { left: var(--space-3); right: var(--space-3); bottom: 4px; }
+
+/* Mobile : le compte est déjà dans chaque rayon ; ici il reste pour le lecteur d'écran */
+.filtres-boutique__total {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (min-width: 1024px) {
+  .filtres-boutique__onglets { display: flex; margin-left: calc(var(--space-3) * -1); }
+  .choix--univers { display: none; }
+  .choix--niveau { flex: 0 0 240px; margin-left: auto; }
+  .filtres-boutique__total {
+    position: static; width: auto; height: auto; margin: 0 0 0 var(--space-3);
+    overflow: visible; clip: auto;
+    font-size: 14px;
+    color: var(--papier-200);
+  }
+}
+
+/* ---------- Rayons (un par univers) ---------- */
+.rayon { padding-block: var(--space-12); border-bottom: 1px solid var(--encre-300); }
+.rayon__grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+
+.rayon__tete { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.rayon__trait { display: block; width: 72px; height: 4px; margin-bottom: var(--space-3); background: var(--accent-2); }
+/* Cyberpunk : le rose reste la couleur de la landing ; en boutique, le trait passe à l'orange (décision de Louis) */
+.rayon[data-univers="cyberpunk"] .rayon__trait { background: var(--policier-orange); }
+.rayon__titre {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 5.4vw, 84px);
+  line-height: 1.04;
+  text-transform: uppercase;
+  color: var(--papier-100);
+}
+.rayon__compte { font-size: 14px; color: var(--papier-200); }
+
+.rayon__produits { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-12) var(--space-6); }
+
+@media (min-width: 1024px) {
+  .rayon { padding-block: var(--space-16); }
+  .rayon__grille { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-6); align-items: start; }
+  .rayon__tete { grid-column: span 4; position: sticky; top: calc(var(--nav-h) + var(--filtres-h) + var(--space-6)); }
+  .rayon__produits { grid-column: span 8; }
+  .rayon__produits--plusieurs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Carte produit ---------- */
+.produit { display: flex; flex-direction: column; min-width: 0; }
+
+.produit__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--encre-200);
+  box-shadow: var(--ombre-carte);
+}
+.produit__media img { object-fit: cover; }
+/* bas de l'image fondu vers l'encre : le titre qui mord dessus reste lisible */
+.produit__media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--encre-100) 0%, rgba(18, 16, 14, .55) 22%, rgba(18, 16, 14, 0) 48%);
+}
+/* voile au repos, qui se lève au survol : la lampe s'allume sur la scène */
+.produit__voile {
+  position: absolute; inset: 0;
+  background: var(--encre-000);
+  opacity: .22;
+  transition: opacity 160ms ease-out;
+}
+.produit:hover .produit__voile,
+.produit:focus-within .produit__voile { opacity: 0; }
+
+.produit__corps { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); padding-inline: var(--space-4); }
+.produit__titre {
+  margin-top: -1.1em; /* le titre mord franchement sur le bas du key art */
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6.4vw, 104px);
+  line-height: 1.04;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--papier-100);
+}
+.rayon__produits--plusieurs .produit__titre { font-size: clamp(44px, 4vw, 64px); }
+/* la période suit le titre sur la même ligne, posée sur sa ligne de base,
+   à l'échelle d'une date d'affiche et dans la couleur de l'univers */
+.produit__periode {
+  font-size: .46em;
+  letter-spacing: .04em;
+  color: var(--accent-2);
+}
+.produit__date { white-space: nowrap; }
+@media (min-width: 1024px) {
+  .produit__periode { font-size: 40px; }
+  .rayon__produits--plusieurs .produit__periode { font-size: .46em; }
+}
+
+.produit__pitch { max-width: 46ch; color: var(--papier-200); }
+.produit__metas { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+.produit__achat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-2);
+}
+.produit__prix { font-size: 24px; font-weight: 700; line-height: 1; letter-spacing: .02em; color: var(--papier-100); }
+/* même hauteur dans les deux états : la ligne ne saute pas à l'ajout */
+.produit__bouton { min-height: 56px; }
+.produit__bouton--dedans { border-color: var(--laiton); color: var(--laiton); }
+.produit__statut { min-height: 1.6em; font-size: 14px; color: var(--laiton); }
+.produit__statut:empty { min-height: 0; }
+
+@media (min-width: 1024px) {
+  .produit__corps { padding-inline: var(--space-6); }
+}
+
+/* ---------- Univers en préparation ---------- */
+.rayon__bientot { display: flex; flex-direction: column; gap: var(--space-5); }
+.rayon__bientot-media {
+  position: relative;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+}
+.rayon__bientot-media img { object-fit: cover; }
+.rayon__bientot-media::after { content: ""; position: absolute; inset: 0; background: var(--encre-000); opacity: .45; }
+.rayon__bientot-texte { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); max-width: 52ch; color: var(--papier-200); }
+
+/* ---------- Aucun résultat ---------- */
+.boutique__vide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block: var(--space-16);
+  color: var(--papier-200);
+}
+.boutique__vide-titre {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--papier-100);
+}

@@ -121,7 +121,7 @@ export function Recois() {
                 </div>
                 <div className="feuille feuille--dossier" aria-hidden="true">
                   <p className="feuille__ref">Dossier n° 74-0314</p>
-                  <p className="feuille__titre">Affaire du Balto</p>
+                  <p className="feuille__titre">Affaire du Cyrano</p>
                   <span className="feuille__photo">
                     <Image src="/img/suspects/policier-veuve.webp" alt="" width={240} height={300} sizes="120px" />
                   </span>
