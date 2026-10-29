@@ -20,3 +20,8 @@
 /* Boutique et panier */
 @import "../styles/boutique.css";
 @import "../styles/panier.css";
+
+/* Démo HOT-00 : /gratuit, le tunnel /gratuit/jouer, /resultat, et le papier de l'enquête */
+@import "../styles/demo-pages.css";
+@import "../styles/demo.css";
+@import "../styles/dossier.css";

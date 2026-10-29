@@ -1,0 +1,209 @@
+/* ---------- Pièces de la démo HOT-00 ----------
+   DA propre aux documents d'enquête, reprise de travail/build.py (le gabarit des PDF imprimés) :
+   mêmes couleurs, mêmes polices, mêmes cotes en mm et pt. 210 mm = 794 px à l'écran ; la visionneuse
+   met la page à l'échelle. Une pièce ne change jamais de couleur et ne porte aucun élément d'interface. */
+
+/* palette du gabarit PDF (build.py, :root) — n'existe que sur le papier de l'enquête :
+   pièces, feuillets du registre, cases de l'intro BD, feuilles de la solution, enveloppes */
+.doc, .feuillet, .case-bd, .feuille-solution, .pli, .demo-hero__note {
+  --doc-encre: #1a1714;
+  --doc-gris: #5c554b;
+  --doc-filet: #b9b0a0;
+  --doc-verm: #d9381e;
+  --doc-tampon: #8e2b20;
+  --doc-papier: #fbf8f1;
+  --doc-stylo: #1d2f5a;
+  --doc-plume: #1a1a2e;
+}
+
+.doc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 16mm 17mm 18mm;
+  background: var(--doc-papier);
+  color: var(--doc-encre);
+  color-scheme: light;
+  font-family: var(--font-document);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  text-align: left;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.doc *, .doc *::before, .doc *::after { box-sizing: border-box; }
+.doc p { margin: 0 0 2.2mm; }
+.doc b { font-weight: 700; }
+.doc ::selection { background: var(--doc-encre); color: var(--doc-papier); }
+
+.doc__pied {
+  position: absolute; bottom: 9mm; left: 17mm; right: 17mm;
+  display: flex; justify-content: space-between;
+  border-top: .3mm solid var(--doc-filet);
+  padding-top: 2mm;
+  font-family: var(--font-mono); font-size: 7pt; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--doc-gris);
+}
+.doc__meta { font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
+.doc__anton { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; }
+.doc__titre { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 26pt; line-height: 1.02; text-transform: uppercase; }
+.doc__small { font-size: 9pt; }
+.doc__gris { color: var(--doc-gris); }
+.doc__rouge { color: var(--doc-tampon); }
+.doc__droite { text-align: right; }
+.doc__milieu { vertical-align: middle !important; }
+.doc__mt2 { margin-top: 2mm; }
+.doc__mt4 { margin-top: 4mm; }
+.doc__mt6 { margin-top: 6mm; }
+
+.doc__table { border-collapse: collapse; width: 100%; font-size: 9pt; }
+.doc__table th, .doc__table td {
+  border: .3mm solid var(--doc-encre);
+  padding: 1.4mm 1.8mm;
+  text-align: left;
+  vertical-align: top;
+}
+.doc__table th {
+  font-family: var(--font-mono); font-size: 6.8pt; letter-spacing: .06em; text-transform: uppercase; font-weight: 700;
+  background: rgba(26, 23, 20, .06);
+}
+
+.doc__bandeau {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-bottom: .8mm solid var(--doc-encre);
+  padding-bottom: 2.5mm; margin-bottom: 5mm;
+}
+.doc__bv { font-family: var(--font-display); font-size: 13pt; letter-spacing: .04em; line-height: 1.1; }
+.doc__bv b { color: var(--doc-verm); font-weight: 400; }
+.doc__bandeau-meta { text-align: right; }
+
+.doc__tampon {
+  display: inline-block;
+  border: .7mm solid var(--doc-tampon);
+  color: var(--doc-tampon);
+  padding: 1.5mm 3mm;
+  font-family: var(--font-mono); font-weight: 700; font-size: 8pt; letter-spacing: .12em; text-transform: uppercase;
+  transform: rotate(-4deg);
+  opacity: .9;
+}
+.doc__manu { font-family: var(--police-reenie), cursive; font-size: 17pt; line-height: 1.05; color: var(--doc-stylo); }
+
+/* ---------- Signatures : ce sont des indices ---------- */
+.doc__sig { display: inline-block; white-space: nowrap; color: var(--doc-stylo); line-height: 1.1; }
+.doc__sig--reenie { font-family: var(--police-reenie), cursive; font-size: 17pt; }
+.doc__sig--homemade { font-family: var(--police-homemade), cursive; font-size: 9pt; }
+.doc__sig--a { font-family: var(--police-belle), cursive; font-size: 19pt; transform: skewX(-14deg); }
+.doc__sig--b { font-family: var(--police-homemade), cursive; font-size: 10pt; }
+.doc__sig-c { position: relative; display: inline-block; padding: 0 6mm 8mm 0; color: var(--doc-plume); }
+.doc__sig--c { font-family: var(--police-doulaise), cursive; font-size: 40pt; line-height: 1; color: var(--doc-plume); transform: skewX(10deg); }
+.doc__paraphe { position: absolute; left: -4mm; bottom: -2mm; }
+.doc__paraphe-avocat { color: var(--doc-plume); }
+
+/* ---------- Page de garde (enveloppes) ---------- */
+.doc--garde { justify-content: center; align-items: center; text-align: center; }
+.doc__cadre { width: 150mm; padding: 18mm 14mm; border: .5mm solid var(--doc-encre); }
+.doc__lettre {
+  margin: 6mm 0;
+  font-family: var(--font-display); font-size: 90pt; line-height: 1.02;
+  -webkit-text-stroke: .6mm var(--doc-encre);
+  color: transparent;
+}
+.doc__garde-titre { font-size: 20pt; line-height: 1.06; text-transform: uppercase; }
+.doc .doc__garde-consigne { margin-top: 6mm; font-weight: 700; }
+.doc .doc__garde-sous { margin-top: 4mm; }
+
+/* ---------- P00 : la planche BD ---------- */
+.doc__p00-tete { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4mm; }
+.doc__planche { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3mm; }
+.doc__planche-ligne { display: grid; grid-template-columns: 62mm minmax(0, 1fr); gap: 3mm; }
+.doc__case { position: relative; overflow: hidden; border: .7mm solid var(--doc-encre); background: var(--doc-encre); }
+.doc__case img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.doc__recits { position: absolute; top: 4mm; left: 4mm; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5mm; }
+.doc__recit {
+  display: inline-block;
+  padding: 1.6mm 3mm;
+  border: .4mm solid var(--doc-encre);
+  background: var(--doc-papier);
+  font-family: var(--font-mono); font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; line-height: 1.3;
+}
+.doc .doc__bulle {
+  position: absolute;
+  max-width: 54mm;
+  margin: 0;
+  padding: 2.5mm 4mm;
+  border: .4mm solid var(--doc-encre);
+  border-radius: 6mm;
+  background: #fff;
+  font-size: 10pt; line-height: 1.35;
+}
+.doc__bulle--bas-droite { bottom: 4mm; right: 4mm; }
+/* case 3 : le tiers droit reste libre pour le héros du Bureau (à venir) */
+.doc__bulle--haut-gauche { top: 4mm; left: 4mm; max-width: 58mm; }
+
+/* ---------- P01, P02 : les registres de l'hôtel ---------- */
+.doc__entete-hotel { margin: 4mm 0 7mm; text-align: center; }
+.doc__entete-hotel--depots { margin-bottom: 6mm; }
+.doc__hotel { font-size: 24pt; letter-spacing: .12em; line-height: 1.1; }
+.doc__hotel--m { font-size: 20pt; }
+.doc__sous-hotel { margin-top: 2mm; font-size: 14pt; line-height: 1.1; }
+.doc .doc__avertissement { margin: 3mm 18mm 0; }
+.doc__filet-titre {
+  margin: 5mm 30mm 0;
+  padding: 2mm 0;
+  border-top: .3mm solid var(--doc-encre);
+  border-bottom: .3mm solid var(--doc-encre);
+  line-height: 1.1;
+}
+.doc__ligne-voyageur { height: 20mm; }
+.doc__ligne-vide { height: 13mm; }
+.doc__table--depots tr { height: 10mm; }
+.doc__manu--visa { font-size: 14pt; }
+.doc__manu--retrait { font-size: 12.5pt; }
+.doc__bas-droite { margin-top: auto; margin-bottom: 10mm; text-align: right; }
+.doc__note-castellane { margin: 9mm 4mm 0 10mm; font-size: 19pt; line-height: 1.15; transform: rotate(-2.5deg); }
+.doc .doc__note-castellane p { margin: 0 0 1.15em; }
+.doc .doc__note-castellane p:last-child { margin: 2mm 0 0; }
+
+/* ---------- P03, P04 : auditions ---------- */
+.doc .doc__lieu { margin-bottom: 1mm; }
+.doc .doc__temoin { margin: 4mm 0 5mm; }
+.doc__temoin .doc__anton { font-size: 12pt; }
+.doc__qr { margin-bottom: 2.6mm; }
+.doc__qr b { font-family: var(--font-mono); font-size: 8.5pt; }
+.doc__signe { display: flex; justify-content: space-between; align-items: center; margin-top: 6mm; }
+.doc__manu--temoin { font-size: 22pt; }
+
+/* ---------- P05 : fiches suspects ---------- */
+.doc__fiche { display: flex; gap: 7mm; align-items: flex-start; margin-bottom: 7mm; }
+.doc .doc__portrait {
+  position: relative;
+  display: block;
+  flex: 0 0 62mm;
+  padding: 0;
+  box-shadow: none;
+}
+/* l'image se pose dans le cadre à 5,5 % de marge : elle ne déborde jamais */
+.doc__portrait-img { position: absolute; top: 5.5%; left: 5.5%; width: 89%; height: 89%; }
+.doc .doc__portrait img { object-fit: cover; }
+.doc__fiche-texte { flex: 1; }
+.doc__champs { width: 100%; margin-top: 1mm; border-collapse: collapse; font-size: 9.5pt; }
+.doc__champs th, .doc__champs td { padding: 1.4mm 1.8mm; border-bottom: .3mm solid var(--doc-filet); text-align: left; vertical-align: top; }
+.doc__champs th {
+  width: 34mm; padding-left: 0;
+  font-family: var(--font-mono); font-size: 6.8pt; letter-spacing: .06em; text-transform: uppercase; font-weight: 700;
+}
+.doc .doc__declaration { margin-top: 3mm; font-size: 9.5pt; }
+
+/* ---------- P06, P07 : lettres ---------- */
+.doc__entete-lettre { margin-bottom: 8mm; padding-bottom: 3mm; border-bottom: .4mm double var(--doc-encre); text-align: center; }
+.doc__domaine { font-family: var(--police-doulaise), cursive; font-size: 34pt; line-height: 1.1; }
+.doc__cabinet { font-size: 20pt; letter-spacing: .14em; line-height: 1.1; }
+.doc__lettre-corps { position: relative; padding: 0 6mm; font-size: 11pt; line-height: 1.75; }
+.doc .doc__date-lettre { margin-top: 14mm; }
+.doc__annotation-hotel { position: absolute; right: 0; top: -6mm; font-size: 16pt; text-align: right; white-space: nowrap; transform: rotate(4deg); }
+.doc__signature-lettre { margin-top: 6mm; padding-left: 70mm; }
+.doc .doc__pour-cabinet { padding-left: 70mm; }
+.doc__tampon-haut { margin-bottom: 5mm; text-align: right; }
+.doc__tampon--remise { font-size: 6.5pt; letter-spacing: .06em; white-space: nowrap; transform: rotate(2deg); }

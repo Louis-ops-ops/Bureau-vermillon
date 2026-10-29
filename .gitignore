@@ -46,3 +46,6 @@ CLAUDE.md
 
 # visuel synchronisé mais pas encore utilisé (future page Narcos)
 /public/img/hero-v2.webp
+
+# copies de travail des sources de l'enquête HOT-00 (recopiées par npm run demo:hot00), hors du site
+/src/content/demo/hot-00/sources/
